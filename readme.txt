@@ -1,1 +1,2 @@
-This is the first time I learn how to use Git.
+Git is a distributed version control system.
+Git is free software.
