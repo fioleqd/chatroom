@@ -35,7 +35,7 @@ public class ChatWindow extends JFrame{
 	 */
 	private static final long serialVersionUID = 1L;
 	HashMap<String, ImageIcon> expressionManager=new HashMap<>();
-	ImageIcon expression=new ImageIcon("./pic/Smile.png");
+	ImageIcon expression=new ImageIcon(this.getClass().getResource("/pic/Smile.png"));
 	JPanel expressionArea=new JPanel();
 	JButton send=new JButton("发送");
 	JButton bar=new JButton();
@@ -81,7 +81,8 @@ public class ChatWindow extends JFrame{
 				b.setBackground(Color.WHITE);
 				b.setBorderPainted(false);
 				b.setBounds(5+j*35, 5+i*35, 30, 30);
-				b.setIcon(new ImageIcon("./pic/emoji_"+String.format("%02d", count)+".png"));
+				String url="/pic/emoji_"+String.format("%02d", count)+".png";
+				b.setIcon(new ImageIcon(this.getClass().getResource(url)));
 				b.setName("emoji_"+String.format("%02d", count));
 				b.addActionListener(new ActionListener() {
 					
@@ -89,8 +90,9 @@ public class ChatWindow extends JFrame{
 					public void actionPerformed(ActionEvent e) {
 						// TODO Auto-generated method stub
 						int position = inputArea.getCaretPosition();
+						String url="/pic/"+b.getName()+".png";
 						try{
-							ImageIcon image=new ImageIcon("./pic/"+b.getName()+".png");
+							ImageIcon image=new ImageIcon(this.getClass().getResource(url));
 							image.setDescription(b.getName());
 							inputArea.insertIcon(image);
 							inputArea.setCaretPosition(position+1);
@@ -102,7 +104,7 @@ public class ChatWindow extends JFrame{
 						}
 					}
 				});
-				expressionManager.put(b.getName(), new ImageIcon("./pic/emoji_"+String.format("%02d", count)+".png"));
+				expressionManager.put(b.getName(), new ImageIcon(this.getClass().getResource(url)));
 				expressionArea.add(b);
 				count++;
 			}
@@ -198,7 +200,6 @@ public class ChatWindow extends JFrame{
 				while(stringToken.hasMoreTokens()){
 					String tempStr=stringToken.nextToken();
 					ImageIcon image=expressionManager.get(tempStr);
-					System.out.println(tempStr);
 					if(image!=null){
 						outputArea.setCaretPosition(outputDoc.getLength());
 						outputArea.insertIcon(image);
@@ -221,7 +222,6 @@ public class ChatWindow extends JFrame{
 				while(stringToken.hasMoreTokens()){
 					String tempStr=stringToken.nextToken();
 					ImageIcon image=expressionManager.get(tempStr);
-					System.out.println(tempStr);
 					if(image!=null){
 						outputArea.setCaretPosition(outputDoc.getLength());
 						outputArea.insertIcon(image);
